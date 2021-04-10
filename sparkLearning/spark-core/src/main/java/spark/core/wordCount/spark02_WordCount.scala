@@ -25,16 +25,26 @@ object spark02_WordCount {
     // 扁平化： 将整体拆成个体的操作
     val words: RDD[String] = lines.flatMap(_.split(" ")) //扁平映射，行字符串变成单词，以空格分割 _表示对于每一个
 
-    // 3.将数据根据单词进行分组，进行统计
-    //(hello, hello, hello) (scala)(spark)
-    val wordGroup: RDD[(String, Iterable[String])] = words.groupBy(word => word)
+    val wordToOne: RDD[(String, Int)] = words.map {
+      word => (word, 1) //将每一个word转换成元组的形式，(word, 1)表示每个单词出现了一次
+    }
+
+    //根据元组的第一个值也就是word进行分组。 (Hello,CompactBuffer((Hello,1), (Hello,1), (Hello,1), (Hello,1)))
+    val wordGroup: RDD[(String, Iterable[(String, Int)])] = wordToOne.groupBy(
+      t => t._1  // t._1 表示元组的第一个值,
+    )
 
     // 4.对分组后的数据进行转换
     //(hello, 3) (scala, 1)
 
-    val wordToCount = wordGroup.map { //对结构转变一般要用map
+    val wordToCount: RDD[(String, Int)] = wordGroup.map {
       case (word, list) => {
-        (word, list.size)
+        val wordCount: (String, Int) = list.reduce(  //reduce默认使用reduceLeft表示从集合头部开始操作
+          (t1, t2) =>
+            (t1._1, t1._2 + t2._2)
+        )
+        wordCount //(hello, 4)
+
       }
     }
 
@@ -47,6 +57,7 @@ object spark02_WordCount {
 
     // TODO 3. 关闭连接
     sc.stop()
+
 
 
 
