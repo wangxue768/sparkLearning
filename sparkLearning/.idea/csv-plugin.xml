@@ -3,7 +3,35 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\spark-core\pom.xml">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\spark-core\src\main\java\spark\core\test.scala">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\spark-core\src\main\java\spark\core\wordCount\spark01_WordCount.scala">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\spark-core\src\main\java\spark\core\wordCount\spark02_WordCount.scala">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\spark-core\src\main\java\spark\core\wordCount\spark03_WordCount.scala">
           <value>
             <Attribute>
               <option name="separator" value=":" />
